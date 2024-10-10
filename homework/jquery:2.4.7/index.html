@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
+		<style>
+		    .move{
+		        height: 50px;
+		        width: 15%;
+		        border:solid 1px black;
+		        background-color:gray;
+		        margin:5px;
+		        position:relative;
+		        color:white;
+		    }
+		    #container
+		    {
+		        display:flex;
+		    }
+		</style>
+	</head>
+
+	<body>
+        <div id = container>
+            <div class = move id = div1></div>
+            <div class = move id = div2></div>
+            <div class = move id = div3></div>
+            <div class = move id = div4></div>
+            <div class = move id = div5></div>
+            <div class = move id = div6></div>
+            <div class = move id = div7></div>
+            <div class = move id = div8></div>
+        </div>
+        <script>
+//Make each div travel to the bottom of the window and then return to it's original position
+//The following div should not start moving until the first div has reached the bottom of the window
+
+//1. Make. nested animations. The callback function for the animation will be another animation.
+//Make use of the div IDs.
+//2.The return up should be a different set of nested animations. The first div should ascend
+//immediately after reaching the bottom.
+//3. Use setInterval to get the program to continue endlessly. Full execution is 5.3 seconds. Time
+//the interval so that the next iteration occurs only after all divs have returned to their original 
+//location.
+
+            //This will grab the height of the window of the browser
+            var HEIGHT = $(window).height();
+            //Orginal position for $(window).height();
+            var moveBack = "0px";
+            //The nested animations
+            function divWave(){
+                $("#div1").animate({top: HEIGHT}, "fast", function(){
+                    $("#div1").animate({top: moveBack}, "fast", function(){
+                        $("#div2").animate({top: HEIGHT}, "fast", function(){
+                            $("#div2").animate({top: moveBack}, "fast", function(){
+                                $("#div3").animate({top: HEIGHT}, "fast", function(){
+                                    $("#div3").animate({top: moveBack}, "fast", function(){
+                                        $("#div4").animate({top: HEIGHT}, "fast", function(){
+                                            $("#div4").animate({top: moveBack}, "fast", function(){
+                                                $("#div5").animate({top: HEIGHT}, "fast", function(){
+                                                    $("#div5").animate({top: moveBack}, "fast", function(){
+                                                        $("#div6").animate({top: HEIGHT}, "fast", function(){
+                                                            $("#div6").animate({top: moveBack}, "fast", function(){
+                                                                $("div7").animate({top: HEIGHT}, "fast", function(){
+                                                                    $("div7").animate({top: moveBack}, "fast", function(){
+                                                                        $("div8").animate({top: HEIGHT}, "fast", function(){
+                                                                            $("#div8").animate({top: moveBack}, "fast");
+                                                                        })
+                                                                    })
+                                                                })
+                                                            })
+                                                        })
+                                                    })
+                                                })
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            }
+            
+                
+            setInterval(function(){
+                divWave();
+            }, 5300);
+            //5.3 seconds is 5300 miliseconds
+            
+            
+            
+            </script>
+	</body>
+</html>
