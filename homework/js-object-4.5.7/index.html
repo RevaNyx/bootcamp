@@ -2,24 +2,79 @@
 <html>
 	<head>
 		<title>Your Page Title</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
-		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	</head>
 
 	<body>
-		<div id = "to-do">
+		<div id="to-do">
 		    <h4>To Do List!</h4>
 		</div>
 		<hr>
 		<div>
-		    <form id = "task-form">
+		    <form onsubmit="saveTaskData(); return false;">
+		        <input type="text" name="task" placeholder="Enter a task" required>
+		        <input type="submit" value="Add Task">
 		    </form>
 		</div>
 		<br>
-		<div id= "to-do-list">
+		<div id="to-do-list">
+		    <ul></ul> <!--Put the tasks here! -->
 		</div>
 	</body>
 	<script>
-	    
+	    // Load tasks from localStorage when the page loads
+	    $(document).ready(function() {
+	        loadTasks();
+	    });
+
+	    // Function to save the task and append it as a list item
+	    function saveTaskData() {
+	        event.preventDefault(); // Prevent the form from refreshing the page
+	        
+	        var form = $("form");
+	        var task = form.serializeArray(); // Serialize the form data
+	        var taskValue = task[0].value;
+	        
+	        // Create a new list item with the task
+	        var listItem = $("<li>" + taskValue + "</li>");
+	        
+	        // Attach click event to toggle line-through
+	        listItem.click(function() {
+	            $(this).css("text-decoration", "line-through");
+	        });
+	        
+	        // Append the list item to the to-do list
+	        $("#to-do-list ul").append(listItem);
+	        
+	        // Save the task to localStorage
+	        saveToLocalStorage(taskValue);
+	        
+	        // Reset the form after submission
+	        form.trigger("reset");
+	    }
+
+	    // Function to save the task to localStorage
+	    function saveToLocalStorage(task) {
+	        let tasks = JSON.parse(localStorage.getItem("tasks")) || []; // Retrieve tasks from localStorage, or create an empty array
+	        tasks.push(task); // Add the new task
+	        localStorage.setItem("tasks", JSON.stringify(tasks)); // Save the updated task list to localStorage
+	    }
+
+	    // Function to load tasks from localStorage and display them
+	    function loadTasks() {
+	        let tasks = JSON.parse(localStorage.getItem("tasks")) || []; // Retrieve tasks from localStorage, or create an empty array
+
+	        // Loop through the tasks and append them to the to-do list
+	        tasks.forEach(function(task) {
+	            var listItem = $("<li>" + task + "</li>");
+
+	            // Attach click event to toggle line-through
+	            listItem.click(function() {
+	                $(this).css("text-decoration", "line-through");
+	            });
+
+	            $("#to-do-list ul").append(listItem);
+	        });
+	    }
 	</script>
 </html>
