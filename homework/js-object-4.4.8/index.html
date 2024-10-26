@@ -1,94 +1,152 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Styled Phonebook</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        #phonebook-container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(to bottom, #99ccff 17%, #003300 90%);;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #009999;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #009999;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00ccff;
+        }
         #contact-reveal {
             margin-top: 20px;
             padding: 10px;
+            background-color: #009999;
             border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .contact-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #e7f3fe;
+            border-radius: 5px;
         }
     </style>
 </head>
-
 <body>
-    <button id="add">Add New Contact</button>
-    <button id="retrieve">Retrieve Contact</button>
-    
-    <div id="contact-reveal"></div>
-    
-    <script>
-        // Check if phonebook exists in localStorage, otherwise create an empty array
-        function loadPhonebook() {
-            if (!localStorage.phonebook) {
-                localStorage.phonebook = JSON.stringify([]);  // Create empty phonebook if it doesn't exist
-            }
-        }
 
-        // Function to add a new contact to the phonebook
-        function addContact() {
-            // Prompt the user for first name, last name, and phone number
+<div id="phonebook-container">
+    <h2>Tamir's Phonebook</h2>
+    <button id="add">Add Contact</button>
+    <button id="retrieve">Retrieve Contact</button>
+    <button id="print">Print Contacts</button>
+    <div id="contact-reveal"></div>
+</div>
+
+<script>
+    // Function to load or initialize the phonebook
+    function loadPhonebook() {
+        if (!localStorage.phonebook) {
+            localStorage.phonebook = JSON.stringify([]);
+        }
+    }
+
+    // Function to add a contact to the phonebook
+    function addContact() {
+        let firstName = prompt("Enter first name:");
+        let lastName = prompt("Enter last name:");
+        let phoneNumber = prompt("Enter phone number:");
+
+        let contact = {
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber
+        };
+
+        let phonebook = JSON.parse(localStorage.phonebook);
+        phonebook.push(contact);
+        localStorage.phonebook = JSON.stringify(phonebook);
+
+        alert("Contact added successfully!");
+    }
+
+    // Function to check if a contact exists
+    function contactExists(first, last) {
+        let phonebook = JSON.parse(localStorage.phonebook);
+        return phonebook.some(contact => contact.firstName === first && contact.lastName === last);
+    }
+
+    // Function to retrieve a contact's details
+    function retrieveContact(first, last) {
+        let phonebook = JSON.parse(localStorage.phonebook);
+        return phonebook.find(contact => contact.firstName === first && contact.lastName === last);
+    }
+
+    // Function to print all contacts in the phonebook
+    function printContacts() {
+        let phonebook = JSON.parse(localStorage.phonebook);
+        let contactRevealDiv = $("#contact-reveal");
+
+        contactRevealDiv.empty(); // Clear previous contact information
+
+        if (phonebook.length === 0) {
+            contactRevealDiv.html("<p>No contacts found in the phonebook.</p>");
+        } else {
+            phonebook.forEach(contact => {
+                let contactHtml = `
+                    <div class="contact-item">
+                        <strong>Name:</strong> ${contact.firstName} ${contact.lastName}<br>
+                        <strong>Phone:</strong> ${contact.phoneNumber}
+                    </div>
+                `;
+                contactRevealDiv.append(contactHtml);
+            });
+        }
+    }
+
+    // Document ready function to set up event listeners
+    $(document).ready(function() {
+        loadPhonebook();  // Load or create phonebook on page load
+
+        $("#add").click(addContact);
+        $("#retrieve").click(function() {
             let firstName = prompt("Enter first name:");
             let lastName = prompt("Enter last name:");
-            let phoneNumber = prompt("Enter phone number:");
-            
-            // Create a contact object
-            let contact = {
-                firstName: firstName,
-                lastName: lastName,
-                phoneNumber: phoneNumber
-            };
-            
-            // Get the current phonebook from localStorage
-            let phonebook = JSON.parse(localStorage.phonebook);
-            
-            // Add the new contact to the phonebook
-            phonebook.push(contact);
-            
-            // Save the updated phonebook back to localStorage
-            localStorage.phonebook = JSON.stringify(phonebook);
-            
-            alert("Contact added successfully!");
-        }
 
-        // Function to check if a contact exists
-        function contactExists(first, last) {
-            let phonebook = JSON.parse(localStorage.phonebook);
-            return phonebook.some(contact => contact.firstName === first && contact.lastName === last);
-        }
-
-        // Function to retrieve a contact's details
-        function retrieveContact(first, last) {
-            let phonebook = JSON.parse(localStorage.phonebook);
-            let contact = phonebook.find(contact => contact.firstName === first && contact.lastName === last);
-            return contact;
-        }
-
-        // Event listener for adding a contact
-        $(document).ready(function() {
-            loadPhonebook();  // Load or create phonebook on page load
-
-            // Add contact button
-            $("#add").click(addContact);
-
-            // Retrieve contact button
-            $("#retrieve").click(function() {
-                let firstName = prompt("Enter first name:");
-                let lastName = prompt("Enter last name:");
-
-                if (contactExists(firstName, lastName)) {
-                    let contact = retrieveContact(firstName, lastName);
-                    $("#contact-reveal").html(`Name: ${contact.firstName} ${contact.lastName}<br>Phone: ${contact.phoneNumber}`);
+            if (contactExists(firstName, lastName)) {
+                let contact = retrieveContact(firstName, lastName);
+                $("#contact-reveal").html(`Name: ${contact.firstName} ${contact.lastName}<br>Phone: ${contact.phoneNumber}`);
+            } else {
+                let addContactResponse = confirm("Contact not found. Would you like to add this contact?");
+                if (addContactResponse) {
+                    addContact();
                 } else {
-                    let addContactResponse = confirm("Contact not found. Would you like to add this contact?");
-                    if (addContactResponse) {
-                        addContact();
-                    } else {
-                        $("#contact-reveal").html("Contact could not be found.");
-                    }
+                    $("#contact-reveal").html("Contact could not be found.");
                 }
-            });
+            }
         });
-    </script>
+
+        // Print contacts button
+        $("#print").click(printContacts);
+    });
+</script>
+
 </body>
 </html>
