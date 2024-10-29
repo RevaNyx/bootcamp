@@ -9,7 +9,7 @@ b = 226
 #1. If a is greater than b then print "a is bigger than b"
 if a > b 
     print 'a is bigger than b'
-elsif b < a # else if b is bigger than a then print "b is bigger than a"
+elsif b < a # else if b is less than a then print "b is less than a"
     print 'b is less than a'
 else # if the first two conditions are not true then print a and b are equal
     print 'a and b are equal'
