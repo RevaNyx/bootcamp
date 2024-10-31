@@ -2,15 +2,14 @@
 fruits = ["apple", "banana", "cherry", "date", "fig", "grape"]
 
 # List each fruit in the array
-fruits.each do |fruit|
-  # Print each fruit individually
-  puts "#{fruit}"
-end
+
+puts " Fruits: #{fruits}"
+
 puts # Blank line for readability
 
 # List the first and last fruits in the array
-puts "FIRST FRUIT: #{fruits[0]}"       # Access the first fruit at index 0
-puts "LAST FRUIT: #{fruits[-1]}"       # Access the last fruit using -1
+puts "FIRST FRUIT: #{fruits.first}"       # Access the first fruit at index 0
+puts "LAST FRUIT: #{fruits.last}"       # Access the last fruit using -1
 puts
 
 # Add a new fruit, kiwi
@@ -40,12 +39,9 @@ puts "Please enter a fruit: "
 fruit_input = gets.chomp.downcase      # Receives input from the user and downcases it
 
 # Check if the input fruit is already in the array
-if fruits.include?(fruit_input)        
-  puts "#{fruit_input.capitalize} is in the fruits array."
-else
-  puts "#{fruit_input.capitalize} is not in the fruits array."
-end
 
+
+puts "Is 'apple' in the array? #{fruits.include?('apple')}"
 # Sort the fruits array in alphabetical order
 sorted_fruits = fruits.sort            
 
