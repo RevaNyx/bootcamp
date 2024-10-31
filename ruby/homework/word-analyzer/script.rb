@@ -9,13 +9,13 @@
 # Analyze each word in the array
 for word in words_to_analyze
 =begin
-   For every word in the the array, "words_to_analyze", 
+   For every word in the array, "words_to_analyze", 
    this program will check for the following:
 =end
 
 
 # Is the word a palindrome?
-    is_palindrome = word == word.reverse
+    is_palindrome = word == word.downcase.reverse
 =begin
 If the word is a Palindrome, then the word is equal to
 itself in reverse.
@@ -48,6 +48,12 @@ itself in reverse.
     puts
     puts
 end
+
+
+puts "Anangram pairs"
+anagrams.each do |key, value|
+    if value.length > 1
+        puts 
 
 =begin
     Each word is anylyzed and the results 
