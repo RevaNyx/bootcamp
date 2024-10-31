@@ -1,3 +1,6 @@
+--STARTED: 2:30pm
+--ENDED: 3:30pm
+
 CREATE TABLE movies (
 	id serial PRIMARY KEY,
 	title TEXT NOT NULL,
