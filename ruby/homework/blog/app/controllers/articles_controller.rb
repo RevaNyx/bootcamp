@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+  http_basic_authenticate_with name: "miia", password: "pass", except: [:index, :show]
 
   def index
     @articles = Article.all
@@ -21,6 +22,7 @@ class ArticlesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
 
   def edit
     @article = Article.find(params[:id])
