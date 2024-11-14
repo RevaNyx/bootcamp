@@ -1,17 +1,15 @@
-<h1><%= @article.title %></h1>
+<p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
 
-<p><%= @article.body %></p>
+<p>
+  <strong>Author:</strong>
+  <%= @article.author %>
+</p>
 
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
+<p>
+  <strong>Text:</strong>
+  <%= @article.text %>
+</p>
 
-<h2>Comments</h2>
-<%= render @article.comments %>
-
-<h2>Add a comment:</h2>
-<%= render "comments/form", article: @article %>

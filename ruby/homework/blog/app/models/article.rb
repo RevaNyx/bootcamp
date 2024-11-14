@@ -1,9 +1,7 @@
 class Article < ApplicationRecord
-    
-    has_many :comments, dependent: :destroy
-    belongs_to :category, optional: true
-    
-    validates :title, presence: true
-    validates :body, presence: true, length: { minimum: 10 }
-  end
-  
+  belongs_to :author
+  belongs_to :category
+  has_many :comments, dependent: :destroy
+
+  validates :title, :content, :author, :category, presence: true
+end
