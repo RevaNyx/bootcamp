@@ -1,6 +1,12 @@
 class AuthorsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_author, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @authors = Author.all
+  end
+
+  def show
+  end
 
   def new
     @author = Author.new
@@ -8,30 +14,27 @@ class AuthorsController < ApplicationController
 
   def create
     @author = Author.new(author_params)
-    if author.save
-      redirect_to author_path(author), notice: 'Author created successfully.'
+
+    if @author.save
+      redirect_to author_path(@author), notice: 'Author was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def show
-    # @author is set in the set_author method
-    @articles = @author.articles # Assumes an association where Author has_many :articles
+  def edit
   end
-
-  def edit; end
 
   def update
     if @author.update(author_params)
-      redirect_to author_path(author), notice: 'Author updated successfully.'
+      redirect_to author_path(@author), notice: 'Author was successfully updated.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    author.destroy
+    @author.destroy
     redirect_to authors_path, notice: 'Author was successfully deleted.'
   end
 

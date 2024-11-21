@@ -1,15 +1,44 @@
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+<% content_for :javascript do %>
+    <script type="module">
+        import "article";
+    </script>
+<% end %>
 
-<p>
-  <strong>Author:</strong>
-  <%= @article.author %>
-</p>
+<h1><%= @article.title %></h1>
+<div id="article-content">
+    <p><%= @article.body %></p>
 
-<p>
-  <strong>Text:</strong>
-  <%= @article.text %>
-</p>
+    <p><strong>Author:</strong> 
+    <% if @article.author.present? %>
+        <%= @article.author.name %>
+    <% else %>
+        <em>Author not assigned</em>
+    <% end %>
+    </p>
 
+    <ul>
+    <li><%= link_to "Edit", edit_article_path(@article) %></li>
+    <li><%= link_to "Delete", article_path(@article), data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                    } %></li>
+    </ul>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="initial-comments">
+        <%= render @article.comments.limit(3) %> <!-- Show the first 3 comments -->
+    </div>
+
+    <button id="toggle-button">Show More Comments</button>
+
+    <div id="additional-comments" style="display: none;">
+        <%= render @article.comments.offset(3) %> <!-- Show the rest of the comments after the first 3 -->
+    </div>
+
+    <h2>Add a comment:</h2>
+    <%= render "comments/form", article: @article %>
+</div>
+</div>
+
+<%= link_to 'Back', articles_path(@category) %>

@@ -1,14 +1,28 @@
 <h1>Edit Category</h1>
-<%= form_with model: @category, local: true do |form| %>
-  <p>
-    <%= form.label :name %><br>
+
+<%= form_with(model: @category, local: true) do |form| %>
+  <% if @category.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+      <ul>
+        <% @category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name %>
     <%= form.text_field :name %>
-  </p>
-  <p>
-    <%= form.label :description %><br>
+  </div>
+
+  <div>
+    <%= form.label :description %>
     <%= form.text_area :description %>
-  </p>
-  <p>
-    <%= form.submit "Update Category" %>
-  </p>
+  </div>
+
+  <div>
+    <%= form.submit "Save Changes" %>
+  </div>
 <% end %>

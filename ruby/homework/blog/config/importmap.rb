@@ -1,7 +1,10 @@
 # Pin npm packages by running ./bin/importmap
-
+pin "rails", to: "rails.js"
+pin "@rails/ujs", to: "https://cdn.jsdelivr.net/npm/@rails/ujs@7.0.0/dist/rails-ujs.min.js"
 pin "application"
 pin "@hotwired/turbo-rails", to: "turbo.min.js"
 pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
+pin "donation", to: "donation.js"
+pin "article", to: "article.js"

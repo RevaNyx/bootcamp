@@ -1,0 +1,18 @@
+<%= javascript_include_tag "donation", type: "module" %> <!-- Load the donation.js.erb file -->
+
+<h1 >Support Our Blog</h1>
+<%= form_with url: donations_path, method: :post, local: true, id: "payment-form" do |form| %>
+  <%= form.hidden_field :csrf_token, value: form_authenticity_token %> <!-- Ensure the CSRF token is included -->
+  <%= form.label :email %><br />
+    <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+  <label for="amount">Donation Amount:</label>
+  <input type="number" name="amount" min="1" required />
+
+  <label for="card-element">Credit or Debit Card:</label>
+  <div id="card-element"><!-- Stripe will place the card input here --></div>
+
+  <button type="submit">Donate</button>
+  
+<% end %>
+
+<%= link_to "Back to Categories", categories_path %>

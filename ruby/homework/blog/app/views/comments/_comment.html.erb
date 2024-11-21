@@ -1,17 +1,17 @@
-<p>
-  <strong>Commenter:</strong>
-  <%= comment.commenter %>
-</p>
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
-<p>
-  <%= link_to "Destroy Comment", [comment.article, comment], data: {
-    turbo_method: :delete,
-    turbo_confirm: "Are you sure?"
-  } %>
-</p>
-<p>
-  <%= link_to "Edit", edit_article_comment_path(comment.article, comment) %>
-</p>
+  <p>
+    
+  <strong><%= comment.commenter %></strong>:
+    <%= comment.body %>
+  </p>
+
+  <!-- Like/Unlike Button -->
+  <p>
+    <button class="like-btn" data-comment-id="<%= comment.id %>">Like</button>
+  </p>
+
+  <p>
+    <%= link_to "Delete Comment", [comment.article, comment], data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"
+    } %>
+  </p>
