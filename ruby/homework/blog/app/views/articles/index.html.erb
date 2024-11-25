@@ -1,4 +1,9 @@
-
+<nav id="nav-links">
+<%= link_to "Categories", categories_path %>
+<%= link_to 'Authors', authors_path %>
+<%= link_to 'All Articles', articles_path(@category) %>
+<%= link_to 'Donations Page', donations_new_path %>
+</nav>
 <h1>Articles in <%= @category.name %></h1>
 
 
@@ -7,11 +12,11 @@
 <% @articles.each do |article| %>
       <li>
         <%= link_to article.title, article_path(article) %> |
-        <%= link_to 'Edit', edit_article_path(@category, article) %>|
+        <%= link_to 'Edit', edit_article_path(article) %>|
         <%= link_to 'Delete', article_path(@category, article), method: :delete, data: { confirm: 'Are you sure?' } %>
       </li>
 <% end %>
 </ul>
 
 <%= link_to 'New Article', new_article_path(@category) %>
-<%= link_to "Back to Categories", categories_path %>
+

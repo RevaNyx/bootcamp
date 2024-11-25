@@ -1,11 +1,23 @@
-<h1>Categories</h1>
-<%= link_to 'New Category', new_category_path %>
-<%= link_to 'View Authors', authors_path %>
-<% @categories.each do |category| %>
-  <li>
-    <%= link_to category.name, category %> <i><%= category.description %></i> - <%= category.articles.count %> articles
-  </li>
-<% end %>
+<nav id="nav-links">
+<%= link_to "Categories", categories_path %>
+<%= link_to 'Authors', authors_path %>
+<%= link_to 'All Articles', articles_path(@category) %>
 <%= link_to 'Donations Page', donations_new_path %>
+</nav>
+
+<div id="categories-page">
+  <h1>Categories</h1>
+    <div id="category-card">
+    <% @categories.each do |category| %>
+      <div class="category-box">
+        <div class="category-info">
+          <%= link_to category.name, category_path(category), class: "category-title" %> <!-- Category name link -->
+          <p class="category-description"><i><%= category.description %></i></p> <!-- Category description -->
+          <p class="category-articles-count"><%= category.articles.count %> articles</p> <!-- Article count -->
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 

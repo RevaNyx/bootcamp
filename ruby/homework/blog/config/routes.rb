@@ -19,8 +19,9 @@ Rails.application.routes.draw do
     resources :donations, only: [:new, :create]
 
     resources :articles do
-      resources :comments
+      resources :comments, only: [:create, :destroy]  # Only allow create and destroy actions for comments
     end
+    
   
   # Close the articles block
   # Close the categories block

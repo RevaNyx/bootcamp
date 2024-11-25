@@ -1,27 +1,30 @@
-<h1><%= @category.name %></h1>
-<p><%= @category.description %></p>
-<ul>
+<nav id="nav-links">
+<%= link_to "Categories", categories_path %>
+<%= link_to 'Authors', authors_path %>
+<%= link_to 'All Articles', articles_path(@category) %>
+<%= link_to 'Donations Page', donations_new_path %>
+</nav>
+<div class="container"
+    <h1><%= @category.name %></h1>
+    <p><%= @category.description %></p>
+    <ul>
 
-<h2> Articles in <%= @category.name %> </h2>
-<% if @articles.present? %>
-    <% @articles.each do |article| %>
-        <div>
-            <p><%= link_to article.title, article_path(article) %></p>
-        </div>
-    <% end %>
-<% else %>
-    <p>No Articles Found in this Category</p>
-<%end%>
-<li><%= link_to "Edit Category", edit_category_path(@category) %></li>
-<li><%= link_to "Destroy Category", category_path(@category), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                } %></li>
+    <h2> Articles in <%= @category.name %> </h2>
+    <% if @articles.present? %>
+        <% @articles.each do |article| %>
+            <div>
+                <p><%= link_to article.title, article_path(article) %></p>
+            </div>
+        <% end %>
+    <% else %>
+        <p>No Articles Found in this Category</p>
+    <%end%>
+    <li><%= link_to "Edit Category", edit_category_path(@category) %></li>
+    <li><%= link_to "Destroy Category", category_path(@category), data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                    } %></li>
 
-</ul>
-<%= link_to 'Back', categories_path %>
-
-
-
-<%= link_to 'Add Article', new_article_path(@category) %>
-
+    </ul>
+    <%= link_to 'Add Article', new_article_path(@category) %>
+</div>

@@ -3,7 +3,12 @@
         import "article";
     </script>
 <% end %>
-
+<nav id="nav-links">
+<%= link_to "Categories", categories_path %>
+<%= link_to 'Authors', authors_path %>
+<%= link_to 'All Articles', articles_path(@category) %>
+<%= link_to 'Donations Page', donations_new_path %>
+</nav>
 <h1><%= @article.title %></h1>
 <div id="article-content">
     <p><%= @article.body %></p>
@@ -41,4 +46,4 @@
 </div>
 </div>
 
-<%= link_to 'Back', articles_path(@category) %>
+

@@ -1,31 +1,256 @@
-/* application.css */
+#application-body {
+  
+    overflow-x: hidden; /* Disable horizontal scrolling */
+ 
+ 
+    height: 100vh;
+ 
+ 
+    font-family: monospace;
+    font-size: 15px
+    letter-spacing: 2px;
+ 
+ 
+   
+    justify-content: center;
+    align-items: center;
+    background-color: #351C2F;
+    color: white;
+   
+ }
+ 
+ 
+ 
+ 
+  
+   
+  #categories-page {
+   
+   
+    background-color: #351C2F;
+  
+    opacity: 80%;
+   
+    height: 100%; /* Full height of the viewport */
+    width: 100vw;
+   
+ 
+ 
+  }
 
-/* Test background color */
-body {
-    background-color: white;
-  }
-  
-  /* Test heading style */
-  h1 {
-    color: #333333;  /* Dark gray */
+
+ {
+  .container {
+    width: 95%; /* Make the container take up more width on smaller screens */
+  }}
+
+   #donation-page-title {
     text-align: center;
-    font-size: 36px;
+    font-size: 2rem;
   }
   
-  /* Test paragraph style */
-  p {
-    color: #666666;  /* Medium gray */
-    font-size: 18px;
-    line-height: 1.6;
+   #comments-section {
+    margin-top: 20px;
+  }
+   #category-container{
+    background-color: #351C2F;
+    padding: 20px
+    opacity: 80%;
+   
+    height: 100vh; /* Full height of the viewport */
+    width: 100vw;
+        
+  }
+ 
+ 
+  #category-description {
+    text-align: center;
+   
+  }
+ 
+ 
+  #category-nav {
+    text-align: center ;
+  }
+   h1 {
+    text-align: center;
+  }
+ 
+ 
+  h2{
+    text-align: center;
+  }
+ 
+ 
+  /* Change the color of all links */
+ a {
+    color: #9D6AB3;
+    text-decoration: none; /* Removes underline */
+  }
+   a:hover {
+    color: pink;
+    text-decoration: ; /* Optional, adds underline on hover */
+  }
+   #link-container {
+ 
+ 
+    display: flex; /* Ensure links stay on the same line */
+    text-align: center;
+    gap: 30px; /* Add space between the links */
+   
+  }
+   #link-container a {
+   
+    text-decoration: none; /* Optional: Remove underline from links */
+    padding: 20px 10px; /* Optional: Add padding around the links */
+    border: 1px solid #ccc; /* Optional: Add a subtle border */
+    border-radius: 5px; /* Optional: Make the edges rounded */
+ 
+ 
+  }
+   #link-container a:hover {
+    background-color: #9D6AB3; /* Optional: Highlight link on hover */
+  }
+ 
+ 
+  
+  #nav-links {
+    position: sticky;
+    
+    width: 100vw; /* Set width to 100% of viewport */
+    margin-left: -50vw; /* Move it 50% to the left */
+    margin-right: -50vw; /* Move it 50% to the right */
+    margin-top: 20px;
+    position: relative; /* Keep element in normal document flow */
+    left: 50%; /* Position it 50% from the left, centering it */
+    text-align: center; /* Center the text inside the container */
+    t
+    padding: 10px 20px; /* Adjust padding for spacing */
+    background-color: #f5f5f5; /* Adjust background color */
   }
   
-  /* Test link color */
-  a {
-    color: #1a73e8;  /* Blue */
+  #nav-links a {
+    margin: 0 15px; /* Spacing between links */
+    font-size: 1.1em; /* Adjust font size */
+    color: #333; /* Dark color for links */
+    text-decoration: none; /* Remove underline */
+  }
+ 
+ 
+  /* Style for the article count */
+ .article-count {
+    color: #561643; /* Change the text color to red */
+    font-weight: bold; /* Optional: Make it bold */
+    font-size: 16px; /* Optional: Adjust font size */
+  }
+   /* General Form Styling */
+ #form-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #130303 ;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 80%;
+   
+  }
+   /* Label Styling */
+  form .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+   /* Input Field Styling */
+  form  input,
+  form  textarea,
+  form  select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Button Styling */
+  form .form-actions .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+   form .form-actions .btn:hover {
+    background-color: #0056b3;
+  }
+  form #field {
+    height: 100vh;
+  }
+ 
+ 
+ 
+ 
+  .category-image {
+    display: block; /* Makes the image a block element */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%; /* Ensures it doesn't overflow */
+  height: auto; /* Maintain the aspect ratio */
+ 
+ 
+  }
+   #category-card {
+   
+    display: flex;
+    flex-wrap: wrap; /* Makes the categories appear in multiple rows if needed */
+    justify-content: space-around; /* Adds space between category boxes */
+    gap: 20px; /* Spacing between cards */
+    padding: 20px; /* Padding around the whole container */
+  }
+   .category-box {
+    background-color: #DDBDD5; /* Background color for each card */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow to create the floating effect */
+    padding: 15px;
+    width: 500px; /* Fixed width for the cards */
+    text-align: center; /* Centers the text inside the card */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
+  }
+   .category-box:hover {
+    transform: translateY(-10px); /* Moves the card slightly up when hovered */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increases shadow size for a popping effect */
+  }
+   .category-image img {
+    border-radius: 8px; /* Round the image's corners */
+    width: 100%; /* Makes the image responsive */
+    height: auto; /* Keeps the aspect ratio */
+  }
+   .category-info {
+    margin-top: 10px;
+  }
+   .category-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333; /* Dark color for the category name */
     text-decoration: none;
   }
-  
-  a:hover {
-    text-decoration: underline;
+   .category-title:hover {
+    color: #007BFF; /* Change color when hovering over the link */
   }
-  
+   i {
+    font-style: italic;
+    color: #555; /* Lighter color for the description */
+  }
+   .article-count {
+    font-weight: bold;
+    color: #9D6AB3; /* Blue color for the article count */
+  }
+   #user-info {
+    text-align: right;
+  }
+ 
