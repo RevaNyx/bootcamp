@@ -1,18 +1,32 @@
-<%= javascript_include_tag "donation", type: "module" %> <!-- Load the donation.js.erb file -->
+<%= javascript_include_tag "donation", type: "module" %> <!-- Load the donation.js file -->
 
-<h1 >Support Our Blog</h1>
+<h1>Support Our Blog</h1>
 <%= form_with url: donations_path, method: :post, local: true, id: "payment-form" do |form| %>
-  <%= form.hidden_field :csrf_token, value: form_authenticity_token %> <!-- Ensure the CSRF token is included -->
-  <%= form.label :email %><br />
-    <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
-  <label for="amount">Donation Amount:</label>
-  <input type="number" name="amount" min="1" required />
+  <!-- CSRF Token -->
+  <%= form.hidden_field :authenticity_token, value: form_authenticity_token %>
 
+  <!-- Email Field -->
+  <%= form.label :email, "Your Email" %><br />
+  <%= form.email_field :email, required: true, autofocus: true, autocomplete: "email" %>
+
+  <!-- Donation Amount -->
+  <%= form.label :amount, "Donation Amount (in USD)" %><br />
+  <%= form.number_field :amount, min: 1, step: 0.01, required: true, id: "donation_amount" %>
+
+  <!-- Recurring Donation Checkbox -->
+  <div>
+    <%= form.check_box :recurring, id: "donation_recurring" %>
+    <%= form.label :recurring, "Make this a monthly donation" %>
+    <p id="recurring-description" style="display: none;">Your card will be charged monthly.</p>
+  </div>
+
+  <!-- Stripe Card Input -->
   <label for="card-element">Credit or Debit Card:</label>
-  <div id="card-element"><!-- Stripe will place the card input here --></div>
+  <div id="card-element"><!-- Stripe will embed the card input here --></div>
+  <div id="card-errors" role="alert" style="color: red;"></div>
 
+  <!-- Submit Button -->
   <button type="submit">Donate</button>
-  
 <% end %>
 
 <%= link_to "Back to Categories", categories_path %>

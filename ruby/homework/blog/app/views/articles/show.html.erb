@@ -9,8 +9,9 @@
 <%= link_to 'All Articles', articles_path(@category) %>
 <%= link_to 'Donations Page', donations_new_path %>
 </nav>
-<h1><%= @article.title %></h1>
+
 <div id="article-content">
+    <h1><%= @article.title %></h1>
     <p><%= @article.body %></p>
 
     <p><strong>Author:</strong> 
@@ -29,7 +30,7 @@
                     } %></li>
     </ul>
 
-<div id="comments">
+    <div id="comments">
     <h2>Comments</h2>
     <div id="initial-comments">
         <%= render @article.comments.limit(3) %> <!-- Show the first 3 comments -->
