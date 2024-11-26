@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root to: "pages#index"
   
   # Correct the routes by specifying the controller and action

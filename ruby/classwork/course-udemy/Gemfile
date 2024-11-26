@@ -1,13 +1,19 @@
 source "https://rubygems.org"
 # For bootstrap
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
-gem 'sassc-rails', '>= 2.1.0'
+gem 'bootstrap-sass-extras', '~> 0.0.2'
+gem 'sass-rails', '>= 6'
+# Devise for authentication
+gem 'devise', '~> 4.9', '>= 4.9.4'
+# For simple_form
+gem 'simple_form', '~> 5.1'
+# For font-awesome
+gem 'font-awesome-sass', '~> 4.5'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 1.4"
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -56,4 +62,12 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+end
+
+group :production do
+  # Use the Heroku gems [https://devcenter.heroku.com/categories/ruby-support]
+  gem "rails_12factor"
+  # Use PostgreSQL as the database for Active Record [
+  # https://guides.rubyonrails.org/active_record_postgresql.html]
+  gem "pg"
 end
