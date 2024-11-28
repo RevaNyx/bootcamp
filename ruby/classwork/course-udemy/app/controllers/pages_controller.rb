@@ -8,7 +8,5 @@ class PagesController < ApplicationController
   def about
   end
 
-  def show
-    @page = Page.find(params[:id])  # Example for dynamic page lookup
-  end
+ 
 end
